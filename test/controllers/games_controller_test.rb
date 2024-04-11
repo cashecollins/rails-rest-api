@@ -9,6 +9,10 @@ class GamesControllerTest < ActionDispatch::IntegrationTest
 
   test "should get index" do
     get '/api/games', as: :json, headers: @headers
+    body = JSON.parse(response.body)
+
+    assert_equal body["games"].present?, true
+    assert_equal body["games"].length, 4
     assert_response :success
   end
 end

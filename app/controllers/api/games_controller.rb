@@ -5,6 +5,6 @@ class Api::GamesController < ApplicationController
       GameSerializer.new(game)
     end
 
-    render json: {"games": games}, status: :ok
+    render json: {games: games}, status: :ok
   end
 end
