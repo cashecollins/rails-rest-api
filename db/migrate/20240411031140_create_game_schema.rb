@@ -17,6 +17,7 @@ class CreateGameSchema < ActiveRecord::Migration[7.1]
     create_table :user_games do |t|
       t.references :user, null: false, foreign_key: true
       t.references :game, null: false, foreign_key: true
+      t.date :occurred_at, null: false
 
       t.timestamps
     end
