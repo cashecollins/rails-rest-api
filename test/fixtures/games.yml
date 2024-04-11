@@ -1,0 +1,23 @@
+math_game:
+  id: 1
+  name: MyString
+  url: https://www.example.com
+  category_id: 1
+
+reading_game:
+  id: 2
+  name: MyString
+  url: https://www.example.com
+  category_id: 2
+
+speaking_game:
+  id: 3
+  name: MyString
+  url: https://www.example.com
+  category_id: 3
+
+writing_game:
+  id: 4
+  name: MyString
+  url: https://www.example.com
+  category_id: 4

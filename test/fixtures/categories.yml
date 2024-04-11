@@ -1,0 +1,15 @@
+math:
+  id: 1
+  name: Math
+
+reading:
+  id: 2
+  name: Reading
+
+speaking:
+  id: 3
+  name: Speaking
+
+writing:
+  id: 4
+  name: Writing
