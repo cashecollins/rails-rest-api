@@ -28,5 +28,8 @@ module ElevateApi
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    # TODO: Look into middleware for API only apps
+    # TODO: Look into caching for API only apps
   end
 end
