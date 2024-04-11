@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users, path: '', path_names: {
     sign_in: '/api/sessions',
-    sign_out: 'logout',
-    registration: 'signup'
+    sign_out: '/api/logout',
+    registration: '/api/user'
   },
   controllers: {
     sessions: 'users/sessions',
