@@ -1,13 +1,4 @@
 Rails.application.routes.draw do
-  devise_for :users, path: '', path_names: {
-    sign_in: '/api/sessions',
-    sign_out: '/api/logout',
-    registration: '/api/user'
-  },
-  controllers: {
-    sessions: 'users/sessions',
-    registrations: 'users/registrations'
-  }
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -17,7 +8,23 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
+  devise_for :users, path: '/api', path_names: {
+    sign_in: '/sessions',
+    sign_out: '/logout',
+    registration: '/user'
+  },
+  controllers: {
+    sessions: 'users/sessions',
+    registrations: 'users/registrations'
+  }
+
   namespace :api do
     # resources :groups
+    resources :user do
+      collection do
+        post :game_events
+      end
+    end
+    resources :games, only: %i[index]
   end
 end
