@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_11_075818) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_12_013517) do
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -37,7 +37,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_11_075818) do
     t.integer "game_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.date "occurred_at"
+    t.datetime "occurred_at"
+    t.string "timezone_offset"
     t.index ["game_id"], name: "index_user_games_on_game_id"
     t.index ["user_id"], name: "index_user_games_on_user_id"
   end
