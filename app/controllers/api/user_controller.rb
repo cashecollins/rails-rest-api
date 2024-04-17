@@ -8,8 +8,6 @@ class Api::UserController < ApplicationController
   def game_events
     occurred_at_iso_string = game_event_params[:occurred_at]
 
-    puts occurred_at_iso_string
-
     begin
       Time.iso8601(occurred_at_iso_string)
     rescue ArgumentError
@@ -27,6 +25,10 @@ class Api::UserController < ApplicationController
   private
   def game_event_params
     params.require(:game_event).permit(:type, :occurred_at, :game_id)
+    # if params[:type] != "COMPLETED"
+    #   raise Exception.new("Invalid game event type, expecting COMPLETED")
+    #   return
+    # end
   end
 
   def parse_offset(iso_string)

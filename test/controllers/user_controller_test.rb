@@ -19,7 +19,6 @@ class UserControllerTest < ActionDispatch::IntegrationTest
       post '/api/user/game_events', params: { game_event: { type: "COMPLETE", occurred_at: Time.now, game_id: 1 } }, as: :json, headers: @headers
     end
 
-    puts UserGame.last.occurred_at
     assert_response :created
   end
 end
