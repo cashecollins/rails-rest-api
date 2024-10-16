@@ -12,6 +12,11 @@ namespace :rspec do
     system("rails db:reset db:migrate")
   end
 
+  task swag: :environment do
+    prod_protection
+    system("rails rswag:specs:swaggerize")
+  end
+
   task run: :environment do
     prod_protection
     system("bundle exec rspec")
