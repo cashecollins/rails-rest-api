@@ -8,6 +8,7 @@ The following instructions were tested and run on a mac, for a different OS ther
 1. Ruby Version: 3.3.0+
 
 ## Creating the authentication secret key
+TODO: Rewrite to update credentials for development vs production
 In a normal situation we would just have a master.key file that we could give to developers working on this through secure channels, or store it on a secured aws s3 bucket, but in our situation it will just be easiest (and safest) to just recreate the master.key and credentials file.
 
 1. generate a secret for your jwt: `bundle exec rails secret`
@@ -17,12 +18,14 @@ In a normal situation we would just have a master.key file that we could give to
 5. close out of your editor and now you should have a new `credentials.yml.enc` which is your encrypted secrets file
 
 ## Setting up the database
+TODO: Rewrite to talk about postgres
 We are using sqlite for our database, obviously as a proof of concept this works great but for a production environment we would want to opt for a more robust and scalable solution.
 
 1. create and populate a sqlite db: `rails db:migrate`
 2. you should now see a `development.sqlite3` file in your `/storage` folder. This db should now be set up, pre-populated with any necessary data.
 
 ## Tests
+TODO: Rewrite to talk about rspec
 We are using rails built in test suite, there are a lot of other really good options for testing, and I would most likely move to something like RSpec for a production environment. Documentation on the built in test suite can be found here: https://guides.rubyonrails.org/testing.html.
 
 As a part of this test suite we are running integration tests on the models and the controllers. These can be run in specific batches or all together, though here we will just run the whole suite.
