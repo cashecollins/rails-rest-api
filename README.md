@@ -36,7 +36,7 @@ We are serving locally at http://localhost:3000, you'll be able to hit this from
 1. run the server: `rails s`
 
 ## Authentication
-We are using a library called [Devise](https://github.com/heartcombo/devise) for our authentication. We are using devise in conjunction with the [devise-jwt](https://github.com/waiting-for-dev/devise-jwt) library to incorporate JWT's that are passed back and forth through the headers of each RESTful API request and response between client and server. 
+We are using a library called [Devise](https://github.com/heartcombo/devise) for our authentication. We are using devise in conjunction with the [devise-jwt](https://github.com/waiting-for-dev/devise-jwt) library to incorporate JWT's that are passed back and forth through the headers of each RESTful API request and response between client and server.
 
 A newly created JWT will be returned from the API as the `authorization` header on the response from both the `POST: /api/user` and `POST: /api/sessions` endpoints. The JWT will expire every 90 minutes, and the jwt can be invalidated by updating the jti column on the user record, this same process happens on logout so that there are no lingering authorized JWT's.
 

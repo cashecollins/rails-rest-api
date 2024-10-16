@@ -6,7 +6,6 @@ module Authenticatable
     before_action :authenticate
 
     private
-
     def authenticate
       if request.headers['Authorization'].present?
         jwt_payload = JWT.decode(request.headers['Authorization'].split(' ').last,
