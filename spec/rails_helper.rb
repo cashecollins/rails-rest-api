@@ -10,18 +10,16 @@ require File.expand_path('../config/environment', __dir__)
 abort("The Rails environment is running in production mode!") if Rails.env.production? || ENV['DATABASE_URL'].present?
 require 'rspec/rails'
 
-module ImpactTestHelpers
-  def auth_request(user)
-    token = JwtAuthorization.generate_token(user.account)
-    request.headers[:Token] = token
+module TestHelpers
+  def login_user(user)
+    post '/api/v1/sessions', params: { user: { email: user.email, password: user.password } }
+    jwt = response.headers['Authorization'].split(' ').last
+    jwt
   end
 
-  def auth_request_by_account(account)
-    request.headers[:Token] = JwtAuthorization.generate_token(account)
-  end
-
-  def get_token(account)
-    JwtAuthorization.generate_token(account)
+  def get_token(user)
+    jwt = JWT.encode({ user_id: user.id }, Rails.application.credentials.devise_jwt_secret_key!)
+    jwt
   end
 end
 
@@ -57,7 +55,7 @@ RSpec.configure do |config|
   config.include Warden::Test::Helpers
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::IntegrationHelpers, type: :request
-  config.include ImpactTestHelpers
+  config.include TestHelpers
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_paths = "#{::Rails.root}/spec/fixtures"

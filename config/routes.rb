@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-  devise_for :users, path: '/api', path_names: {
+  devise_for :users, path: '/api/v1', path_names: {
                                      sign_in: '/sessions',
                                      sign_out: '/sessions',
                                      registration: '/user'

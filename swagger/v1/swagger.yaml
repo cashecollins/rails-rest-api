@@ -4,7 +4,7 @@ info:
   title: API V1
   version: v1
 paths:
-  "/api/v1/users":
+  "/api/v1/user":
     post:
       summary: Create a new user
       tags:
@@ -44,7 +44,7 @@ paths:
     post:
       summary: Login a user
       tags:
-      - Registration
+      - Session
       parameters: []
       responses:
         '200':
@@ -90,7 +90,7 @@ paths:
     delete:
       summary: Logout a user
       tags:
-      - Registration
+      - Session
       parameters:
       - name: Authorization
         in: header
