@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  mount Rswag::Ui::Engine => '/api-docs'
+  mount Rswag::Api::Engine => '/api-docs'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -12,7 +14,7 @@ Rails.application.routes.draw do
 
   devise_for :users, path: '/api', path_names: {
                                      sign_in: '/sessions',
-                                     sign_out: '/logout',
+                                     sign_out: '/sessions',
                                      registration: '/user'
                                    },
                      controllers: {
@@ -21,6 +23,8 @@ Rails.application.routes.draw do
                      }
 
   namespace :api do
-    # Define your API routes here
+    namespace :v1 do
+      # Define your API routes here
+    end
   end
 end

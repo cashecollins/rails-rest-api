@@ -14,10 +14,17 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.1]
       ## Rememberable
       t.datetime :remember_created_at
 
+      ## User Authentication Token
+      t.string :jti
+
+      # Custom Columns
+      t.string :name
+
       t.timestamps null: false
     end
 
     add_index :users, :email,                unique: true
     add_index :users, :reset_password_token, unique: true
+    add_index :users, :jti
   end
 end

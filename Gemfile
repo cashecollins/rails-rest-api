@@ -55,13 +55,13 @@ end
 group :development do
   gem 'annotate' # adds a comment summarizing the current schema to the top or bottom of each of your models
   gem 'seed_dump' # adds a db:seed:dump task to create seed data files from the existing data in your database
+  gem 'rswag-specs' # generates Swagger documentation from RSpec examples
   gem 'spring'
 end
 
 group :test do
   gem 'rspec'
   gem 'rspec-rails'
-  gem 'rswag-specs'
   gem 'rubocop', require: false
   gem 'rubocop-performance', require: false
   gem 'rubocop-rails_config', require: false
