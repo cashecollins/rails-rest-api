@@ -1,0 +1,78 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/users":
+    post:
+      summary: Create a new user
+      tags:
+      - Registration
+      parameters: []
+      responses:
+        '201':
+          description: created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                    password:
+                      type: string
+                    name:
+                      type: string
+  "/api/v1/sessions":
+    post:
+      summary: Login a user
+      tags:
+      - Registration
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                    password:
+                      type: string   
+    delete:
+      summary: Logout a user
+      tags:
+      - Registration
+      parameters:
+      - name: Authorization
+        in: header
+        example: Bearer {{token}}
+        schema:
+          type: string
+        required: true
+      responses:
+        '200':
+          description: deleted 
+servers:
+- url: http://localhost:3000
+  description: Local Server
+  variables:
+    defaultHost:
+      default: localhost:3000
+- url: https://api.staging.impact-core.com
+  description: Staging Server
+  variables:
+    defaultHost:
+      default: api.staging.impact-core.com
+
