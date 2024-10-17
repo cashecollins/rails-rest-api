@@ -1,5 +1,5 @@
 # Introduction
-This app is built on a ruby on rails stack, on top of a sqlite db. It's purpose is to record and track analytics around game completion for an existing mobile app and handle user management, which includes authentication through a username and password.
+This app is built on a ruby on rails stack, on top of a sqlite db. It's purpose is to record and track analytics around game completion for an existing mobile app and handle user management, which includes authentication through an email and password.
 
 # Getting Started
 The following instructions were tested and run on a mac, for a different OS there may be some discrepencies between commands.

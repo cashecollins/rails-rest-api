@@ -13,6 +13,18 @@ paths:
       responses:
         '201':
           description: created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    type: object
+                    properties:
+                      email:
+                        type: string
+                      name:
+                        type: string
       requestBody:
         content:
           application/json:
@@ -37,6 +49,31 @@ paths:
       responses:
         '200':
           description: successful
+          headers:
+            authorization:
+              example: Bearer {{token}}
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                        example: Logged in successfully
+                      user:
+                        type: object
+                        properties:
+                          email:
+                            type: string
+                          name:
+                            type: string
       requestBody:
         content:
           application/json:
@@ -63,7 +100,20 @@ paths:
         required: true
       responses:
         '200':
-          description: deleted 
+          description: deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                        example: Logged out successfully
 servers:
 - url: http://localhost:3000
   description: Local Server
@@ -75,4 +125,9 @@ servers:
   variables:
     defaultHost:
       default: api.staging.impact-core.com
+- url: https://api.impact-core.com
+  description: Production Server
+  variables:
+    defaultHost:
+      default: api.impact-core.com
 
