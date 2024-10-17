@@ -120,14 +120,14 @@ servers:
   variables:
     defaultHost:
       default: localhost:3000
-- url: https://api.staging.impact-core.com
+- url: https://api.staging.rails-rest.com
   description: Staging Server
   variables:
     defaultHost:
-      default: api.staging.impact-core.com
-- url: https://api.impact-core.com
+      default: api.staging.rails-rest.com
+- url: https://api.rails-rest.com
   description: Production Server
   variables:
     defaultHost:
-      default: api.impact-core.com
+      default: api.rails-rest.com
 
