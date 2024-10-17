@@ -1,0 +1,37 @@
+#!/bin/sh
+
+# An example hook script to verify what is about to be pushed.  Called by "git
+# push" after it has checked the remote status, but before anything has been
+# pushed.  If this script exits with a non-zero status nothing will be pushed.
+#
+# This hook is called with the following parameters:
+#
+# $1 -- Name of the remote to which the push is being done
+# $2 -- URL to which the push is being done
+#
+# If pushing without using a named remote those arguments will be equal.
+#
+# Information about the commits which are being pushed is supplied as lines to
+# the standard input in the form:
+#
+#   <local ref> <local oid> <remote ref> <remote oid>
+#
+# Only run the tests if we are pushing to a branch named [master, develeopment, all/*] branch
+
+remote="$1"
+url="$2"
+
+while read local_ref local_oid remote_ref remote_oid
+do
+  if [ "$remote" = "origin" ] && [ "$remote_ref" = "refs/heads/master" ] || [ "$remote_ref" = "refs/heads/development" ] || [[ "$remote_ref" == refs/heads/all/* ]]; then
+    echo "\033[0;32m ============== Running Pre-Push Hook ================= \033[0m"
+
+    echo "\033[0;33m Running linter before pushing to $remote_ref \033[0m"
+    bundle exec rubocop -A
+
+    echo "\033[0;33m Running tests before pushing to $remote_ref\033[0m"
+    rails rspec:run
+  fi
+done
+
+exit 0

@@ -1,5 +1,5 @@
 # Introduction
-This app is built on a ruby on rails stack, on top of a sqlite db. It's purpose is to record and track analytics around game completion for an existing mobile app and handle user management, which includes authentication through an email and password.
+This app is built on a ruby on rails stack, on top of a sqlite db. It's purpose is to provide a RESTful API for a user to create an account, login, and logout. The API is secured with JWT's that are passed back and forth between the client and server. The API is also versioned, and the current version is `v1`.
 
 # Getting Started
 The following instructions were tested and run on a mac, for a different OS there may be some discrepencies between commands.
@@ -8,30 +8,39 @@ The following instructions were tested and run on a mac, for a different OS ther
 1. Ruby Version: 3.3.0+
 
 ## Creating the authentication secret key
-TODO: Rewrite to update credentials for development vs production
-In a normal situation we would just have a master.key file that we could give to developers working on this through secure channels, or store it on a secured aws s3 bucket, but in our situation it will just be easiest (and safest) to just recreate the master.key and credentials file.
+We are using the `devise-jwt` library for our authentication, and it requires a secret key to be stored in the rails credentials file. This secret key is used to sign and verify the JWT's that are passed back and forth between the client and server.
 
-1. generate a secret for your jwt: `bundle exec rails secret`
-2. save the secret somewhere, it will be used later.
-3. create and edit your encrypted credentials file: `EDITOR=VIM rails credentials:edit`
-4. add the following line to your now opened credentials file `devise_jwt_secret_key: <secret_from_step_1>`
-5. close out of your editor and now you should have a new `credentials.yml.enc` which is your encrypted secrets file
+To get your app credentialed walk through the following steps:
+
+1. use a pre-determined secret OR generate a secret for your jwt: `bundle exec rails secret`
+2. create and edit your encrypted credentials file: `EDITOR=VIM rails credentials:edit`
+3. add the following line to your now opened credentials file `devise_jwt_secret_key: <secret_from_step_1>`
+4. close out of your editor and now you should have a new `credentials.yml.enc` which is your encrypted secrets file
+
+_NOTE: You can also use environment variables rather than the credentials file, you will need to change some code regarding devise in the `config/initializers/devise.rb` file and other files that use the  `devise_jwt_secret_key` secret key_
 
 ## Setting up the database
-TODO: Rewrite to talk about postgres
 We are using sqlite for our database, obviously as a proof of concept this works great but for a production environment we would want to opt for a more robust and scalable solution.
 
 1. create and populate a sqlite db: `rails db:migrate`
 2. you should now see a `development.sqlite3` file in your `/storage` folder. This db should now be set up, pre-populated with any necessary data.
 
+_NOTE: This can be migrated to a different db by changing the `config/database.yml` file_
+
 ## Tests
-TODO: Rewrite to talk about rspec
-We are using rails built in test suite, there are a lot of other really good options for testing, and I would most likely move to something like RSpec for a production environment. Documentation on the built in test suite can be found here: https://guides.rubyonrails.org/testing.html.
+We are using [RSpec](https://github.com/rspec/rspec-rails) for our testing framework, we utilize [FactoryBot](https://github.com/thoughtbot/factory_bot) for creating test data, and we use [SimpleCov](https://github.com/simplecov-ruby/simplecov) to generate and view code coverage. To get started with testing you can walk through the following steps:
 
-As a part of this test suite we are running integration tests on the models and the controllers. These can be run in specific batches or all together, though here we will just run the whole suite.
-
-1. run tests: `rails t`
+1. create test db: `RAILS_ENV=test rails db:migrate`
 2. you should now see a `teset.sqlite3` file in your `/storage` folder, this is the test databased used by rails for testing.
+3. run the tests: `rails rspec:run`
+4. you should have access to the test coverage report in the `/coverage` folder and can be viewed by viewing the index.html file in a browser.
+
+There are various custom/simplified commands that can be run and can be found in `lib/tasks/rspec_tasks.rake`.
+
+We have git hooks set up for local testing before push, to set this up all you have to do is run the following command `git config core.hooksPath .github/hooks`
+
+_To skip local tests on push you can run `git push --no-verify`_
+
 
 ## Serving
 We are serving locally at http://localhost:3000, you'll be able to hit this from any rest api query tool or curl command.

@@ -11,6 +11,7 @@ describe Users::RegistrationsController, type: :request  do
       # Assert
       expect(response).to have_http_status(:created)
       expect(response.content_type).to eq('application/json; charset=utf-8')
+      expect(response.headers).to include('Authorization')
       expect(response.body).to include('email')
       expect(response.body).to include('name')
     end
