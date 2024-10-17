@@ -54,6 +54,12 @@ A newly created JWT will be returned from the API as the `authorization` header 
 
 All other calls require a header of the following configuration `Authorization: Bearer <jwt>` or they will return a `401 Unauthorized` error.
 
+## Documentation
+We are using [Swagger](https://swagger.io/) for our API documentation. The documentation can be found at http://localhost:3000/api-docs/index.html. You will need to authenticate using the credentials found in `config/initializers/rswag_ui.rb` on initial view.
+
+This documentation should be updated regularly to reflect the latest changes in the API. These changes should be made in the `swagger/v1/swagger.yaml` file.
+
+_NOTE: This documentation can be auto-generated from the codebase and should always up to date with the latest changes. HOWEVER, this is not yet implemented as it requires a rebuild of testing_
 
 
 
